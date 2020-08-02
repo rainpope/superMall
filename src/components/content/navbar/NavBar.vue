@@ -108,7 +108,7 @@ export default {
   position: relative;
   right: 0;
   display: flex;
-  left: 84px;
+  left: 78px;
   top: 10px;
 }
 

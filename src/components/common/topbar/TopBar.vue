@@ -53,11 +53,10 @@ export default {
 }
 .left div,
 .right div {
-  margin-right: 5px;
   cursor: pointer;
 }
 .left div:hover,
-.right div:hover{
+.right div:hover {
   color: #ffffff;
 }
 .left span {
@@ -66,12 +65,13 @@ export default {
 .right {
   display: flex;
 }
-.top-bar-cart {
+.right .top-bar-cart {
   width: 120px;
   text-align: center;
   background-color: #424242;
   margin-left: 10px;
   position: relative;
+  margin-right: none;
 }
 .top-bar-content .top-bar-cart:hover {
   background-color: #ffffff;

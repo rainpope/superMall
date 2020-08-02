@@ -1,12 +1,29 @@
 <template>
   <div id="home">
     <swiper :swiperUrls="swiperUrls"> </swiper>
+    <home-hero></home-hero>
+    <div class="home-bg">
+      <flash-sale></flash-sale>
+      <home-banner>
+        <a href="#">
+          <img
+            src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/e9f7817b9a66ef21d196f6ae6ee6efd7.jpg?thumb=1&w=1226&h=120&f=webp&q=90"
+            alt=""
+          />
+        </a>
+      </home-banner>
+    </div>
   </div>
 </template>
 
 <script>
 import Swiper from "components/common/swiper/Swiper";
 import SwiperItem from "components/common/swiper/SwiperItem";
+
+import HomeHero from "./childComps/HomeHero";
+import FlashSale from "./childComps/FlashSale";
+import HomeBanner from "./childComps/HomeBanner";
+
 export default {
   name: "Home",
   data() {
@@ -38,9 +55,16 @@ export default {
   components: {
     Swiper,
     SwiperItem,
+    HomeHero,
+    FlashSale,
+    HomeBanner,
   },
   methods: {},
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.home-bg {
+  background-color: #f5f5f5;
+}
+</style>

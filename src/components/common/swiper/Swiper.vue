@@ -1,5 +1,5 @@
 <template>
-  <div id="swiper">
+  <div id="swiper" @mouseenter="cleartimer" @mouseleave="settimer">
     <div class="image" ref="image">
       <img
         :src="item.url"
@@ -8,19 +8,26 @@
         class="img-item"
       />
     </div>
-    <div class="go-left" @click="goLeft">
+    <div class="go-left" @click="prePic">
       <span>&lt;</span>
     </div>
-    <div class="go-right" @click="goRight">
+    <div class="go-right" @click="nextPic">
       <span>&gt;</span>
     </div>
     <ul class="swiper-btns">
-      <li class="btn" v-for="(item, index) in swiperUrls"></li>
+      <li
+        class="btn"
+        v-for="(item, index) in swiperUrls"
+        :class="{ active: index == curIndex }"
+        @click="btnClick(index)"
+      ></li>
     </ul>
+    <swiper-nav></swiper-nav>>
   </div>
 </template>
 
 <script>
+import SwiperNav from "./SwiperNav";
 export default {
   name: "SwiperItem",
   props: {
@@ -28,36 +35,70 @@ export default {
       type: Array,
     },
   },
+  components: {
+    SwiperNav,
+  },
   data() {
     return {
       curIndex: 0,
       imgsLength: 0,
+      imgBox: null,
       imgs: [],
+      timer: null,
     };
   },
   mounted() {
-    let imgBox = document.getElementsByClassName("image")[0];
+    this.imgBox = document.getElementsByClassName("image")[0];
     this.imgs = document.getElementsByClassName("img-item");
     this.imgsLength = this.imgs.length;
 
-    if (this.imgsLength > 1) {
-      let preNode = this.imgs[this.imgsLength - 1].cloneNode(true);
-      imgBox.appendChild(this.imgs[0].cloneNode(true));
-      imgBox.insertBefore(preNode, this.imgs[0]);
-    }
+    this.timer = setInterval(() => {
+      this.nextPic();
+    }, 3000);
   },
   methods: {
-    goLeft() {
+    prePic() {
+      // 图片下标减1，如何下标大于图标的数量让下标等于0重新循环
+      this.curIndex--;
+      if (this.curIndex < 0) {
+        this.curIndex = this.imgsLength - 1;
+      }
+      this.picMove();
+    },
+    nextPic() {
+      // 图片下标加1，如何下标大于图标的数量让下标等于0重新循环
       this.curIndex++;
-      for (let i = 0; i < this.imgs.length; i++) {
-        this.imgs[i].style.left = -this.curIndex * 1226 + "px";
+      if (this.curIndex >= this.imgsLength) {
+        this.curIndex = 0;
+      }
+      // 图片移动
+      this.picMove();
+    },
+    picMove() {
+      //遍历所有图片，让下标等于当前图片的显示，不等于的消失
+      for (let i = 0; i < this.imgsLength; i++) {
+        if (i === this.curIndex) {
+          this.imgs[i].style.display = "block";
+          // this.imgs[i].style.animation = "fadeOut 2s";
+        } else {
+          // this.imgs[i].style.animation = "fadeOut 2s";
+          this.imgs[i].style.display = "none";
+        }
       }
     },
-    goRight() {
-      this.curIndex--;
-      for (let i = 0; i < this.imgs.length; i++) {
-        this.imgs[i].style.left = -this.curIndex * 1226 + "px";
-      }
+    cleartimer() {
+      // 鼠标移入取消定时器
+      clearInterval(this.timer);
+    },
+    settimer() {
+      // 鼠标移出设置定时器
+      this.timer = setInterval(() => {
+        this.nextPic();
+      }, 3000);
+    },
+    btnClick(index) {
+      this.curIndex = index;
+      this.picMove();
     },
   },
 };
@@ -69,19 +110,24 @@ export default {
   width: 1226px;
   height: 460px;
   margin: auto;
-  /* overflow: hidden; */
   cursor: pointer;
 }
 
 .image {
-  display: flex;
+  position: relative;
   width: 100%;
 }
 .image img {
   width: 100%;
-  position: relative;
-  left: -1226px;
-  transition: 0.5s;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  /* opacity: 0; */
+}
+.image img:nth-child(1) {
+  display: block;
+  opacity: 1;
 }
 
 .go-left,
@@ -126,5 +172,45 @@ export default {
 
 .active {
   background-color: #fffeee;
+}
+.fadeOut {
+  animation: fadeOut 1s;
+}
+.fadeIn {
+  animation: fadeIn 1s;
+}
+/* 动画效果 */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+/*淡入*/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
