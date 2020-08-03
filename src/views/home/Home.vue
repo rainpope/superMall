@@ -4,14 +4,21 @@
     <home-hero></home-hero>
     <div class="home-bg">
       <flash-sale></flash-sale>
-      <home-banner>
-        <a href="#">
-          <img
-            src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/e9f7817b9a66ef21d196f6ae6ee6efd7.jpg?thumb=1&w=1226&h=120&f=webp&q=90"
-            alt=""
-          />
-        </a>
-      </home-banner>
+
+      <div v-for="item in hometest">
+        <home-banner>
+          <a href="#">
+            <img :src="item.bannerImg" alt="" />
+          </a>
+        </home-banner>
+
+        <home-brick
+          :brick-img="item.brick.brickImg"
+          :brick-item="item.brick.brickItem"
+        >
+          <span slot="brick-hd-title">{{ item.title }}</span>
+        </home-brick>
+      </div>
     </div>
   </div>
 </template>
@@ -23,11 +30,15 @@ import SwiperItem from "components/common/swiper/SwiperItem";
 import HomeHero from "./childComps/HomeHero";
 import FlashSale from "./childComps/FlashSale";
 import HomeBanner from "./childComps/HomeBanner";
+import HomeBrick from "./childComps/HomeBrick";
+
+import { hometest } from "./hometestdata";
 
 export default {
   name: "Home",
   data() {
     return {
+      hometest,
       swiperUrls: [
         {
           url:
@@ -58,8 +69,10 @@ export default {
     HomeHero,
     FlashSale,
     HomeBanner,
+    HomeBrick,
   },
   methods: {},
+  mounted() {},
 };
 </script>
 

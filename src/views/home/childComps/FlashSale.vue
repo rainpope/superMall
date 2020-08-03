@@ -20,7 +20,11 @@
 
       <div class="flashsale-list">
         <ul class="swiper-wrapper">
-          <li class="swiper-slide" v-for="item in commodity" :style="{borderTopColor: item.topStyle}">
+          <li
+            class="swiper-slide"
+            v-for="(item, index) in commodity"
+            :style="{ borderTopColor: item.topStyle }"
+          >
             <a href="#">
               <div class="content">
                 <div class="thumb">
@@ -129,12 +133,12 @@ cnNjWySh29zYFGnIK25KzY1Nkdziptzc2BKJUu7Qbm5sicQom2o3NzZEKqiu/DZpbmyIjIAHNBMZ
       ],
     };
   },
-  mounted() {
+  created() {
     for (let i = 0, j = 0; i < this.commodity.length; i++, j++) {
       if (j > 4) {
         j = 0;
       }
-      this.commodity[i].topStyle = this.topStyle[j]
+      this.commodity[i].topStyle = this.topStyle[j];
     }
   },
 };
