@@ -19,6 +19,12 @@
           <span slot="brick-hd-title">{{ item.title }}</span>
         </home-brick>
       </div>
+      <home-banner>
+        <a href="#">
+          <img :src="hometest[0].bannerImg" alt="" />
+        </a>
+      </home-banner>
+      <home-video :homeVideo="homevideo"></home-video>
     </div>
   </div>
 </template>
@@ -31,14 +37,16 @@ import HomeHero from "./childComps/HomeHero";
 import FlashSale from "./childComps/FlashSale";
 import HomeBanner from "./childComps/HomeBanner";
 import HomeBrick from "./childComps/HomeBrick";
+import HomeVideo from "./childComps/HomeVideo";
 
-import { hometest } from "./hometestdata";
+import { hometest, homevideo} from "./hometestdata";
 
 export default {
   name: "Home",
   data() {
     return {
       hometest,
+      homevideo,
       swiperUrls: [
         {
           url:
@@ -70,6 +78,7 @@ export default {
     FlashSale,
     HomeBanner,
     HomeBrick,
+    HomeVideo,
   },
   methods: {},
   mounted() {},
@@ -79,5 +88,6 @@ export default {
 <style scoped>
 .home-bg {
   background-color: #f5f5f5;
+  padding-bottom: 25px;
 }
 </style>

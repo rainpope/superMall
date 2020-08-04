@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "7440452",
+      "name": "定位",
+      "font_class": "dingwei",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    },
+    {
+      "icon_id": "1069748",
+      "name": "返回顶部",
+      "font_class": "fanhuidingbu",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
+      "icon_id": "6528214",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "14055588",
+      "name": "消息",
+      "font_class": "xiaoxi1",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "15167664",
+      "name": "right",
+      "font_class": "right_6",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "11808714",
+      "name": "播放",
+      "font_class": "icon_play",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
       "icon_id": "8827173",
       "name": "right",
       "font_class": "right",
